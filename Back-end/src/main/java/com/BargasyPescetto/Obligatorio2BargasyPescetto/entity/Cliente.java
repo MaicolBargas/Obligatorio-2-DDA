@@ -10,18 +10,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
-    
+
     @Id
     private int ci;
 
-     @Column(length = 30)
-     private String nombre;
+    @Column(length = 30)
+    private String nombre;
 
-     @Column(length = 30)
-     private String apellido;
+    @Column(length = 30)
+    private String apellido;
 
-     @Column(length = 30)
-     private String email;
+    @Column(length = 30)
+    private String email;
 
     @Override
     public String toString() {
@@ -67,6 +67,7 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public Cliente(){}
+    public Cliente() {
+    }
 
 }
