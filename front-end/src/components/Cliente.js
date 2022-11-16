@@ -15,7 +15,11 @@ const Cliente = () => {
     {
       id: 1,
       name: "ci",
+<<<<<<< HEAD
       type: "text",
+=======
+      type: "numeric",
+>>>>>>> 4bce1cb (Actualizacion de Back-End Maicol)
       placeholder: "CI",
       errorMessage:
         "CI should be 7-8 characters and shouldn't include any special character!",
