@@ -18,8 +18,4 @@ public class NavigationController {
         model.addAttribute("activePage", "contact");
         return "contact";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> f7eb189 (primer commit Maicol)
 }

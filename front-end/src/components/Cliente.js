@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../App.css";
 import FormInput from "./FormInput";
 
-const Cliente = () => {
+function Cliente() {
   const [values, setValues] = useState({
     ci: "",
     email: "",
@@ -28,8 +28,7 @@ const Cliente = () => {
       name: "email",
       type: "email",
       placeholder: "Email",
-      errorMessage: 
-        "It should be a valid email address!",
+      errorMessage: "It should be a valid email address!",
       label: "Email",
       required: true,
     },
@@ -91,6 +90,6 @@ const Cliente = () => {
       </form>
     </div>
   );
-};
+}
 
-export default Cliente;
+export { Cliente };

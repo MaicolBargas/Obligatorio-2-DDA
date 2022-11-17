@@ -15,17 +15,17 @@ import com.BargasyPescetto.Obligatorio2BargasyPescetto.service.PlanService;
 @RestController
 @RequestMapping("/plan")
 public class PlanController {
-    @Autowired 
+    @Autowired
     private PlanService planService;
 
     @PostMapping("/add")
-    public String add(@RequestBody Plan plan){
+    public String add(@RequestBody Plan plan) {
         planService.guardarPlan(plan);
         return "Nuevo plan añadido exitosamente";
     }
 
     @GetMapping("/list")
-    public List<Plan> list(){
+    public List<Plan> list() {
         return planService.listarPlan();
     }
 }
