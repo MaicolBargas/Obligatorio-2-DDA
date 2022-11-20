@@ -7,19 +7,15 @@ function Cliente() {
     ci: "",
     email: "",
     name: "",
-    password: "",
-    confirmPassword: "",
+    // password: "",
+    // confirmPassword: "",
   });
 
   const inputs = [
     {
       id: 1,
       name: "ci",
-<<<<<<< HEAD
       type: "text",
-=======
-      type: "numeric",
->>>>>>> 4bce1cb (Actualizacion de Back-End Maicol)
       placeholder: "CI",
       errorMessage:
         "CI should be 7-8 characters and shouldn't include any special character!",
@@ -79,7 +75,7 @@ function Cliente() {
   };
 
   return (
-    <div className="app">
+    <div className="container-cliente">
       <form onSubmit={handleSubmit}>
         <h1>Cliente</h1>
         {inputs.map((input) => (

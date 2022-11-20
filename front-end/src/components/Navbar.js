@@ -13,7 +13,6 @@ function NavBar() {
           <NavLink exact to="/" className="nav-logo">
             Obligatorio 2
           </NavLink>
-
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink

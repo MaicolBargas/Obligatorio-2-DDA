@@ -1,9 +1,10 @@
 import React from "react";
+import { Plan } from "../Plan";
 
 export const PaginaPlanes = () => {
   return (
     <div>
-    <h1>Planes</h1>
+      <Plan></Plan>
     </div>
   );
 };

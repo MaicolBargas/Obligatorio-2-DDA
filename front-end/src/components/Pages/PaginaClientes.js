@@ -1,10 +1,12 @@
 import React from "react";
-import {Cliente} from "../Cliente"
+import { Cliente } from "../Cliente";
+import TableClientes from "../Table";
 
 export const PaginaClientes = () => {
   return (
     <div>
-      <Cliente></Cliente>
+      {/* <Cliente /> */}
+      <TableClientes />
     </div>
   );
 };
