@@ -1,13 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Button, Modal, Input } from "react-bootstrap";
+import { Button, Modal} from "react-bootstrap";
 import { users } from "../users";
+import { Cliente } from "./Cliente";
+import { Filtrar } from './Filtrar';
+
 
 function Table() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [filter, setFilter] = useState("");
+  const clientesFiltrados = users.filter((user) =>
+    user.first_name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  );
 
   return (
     <div class="container ">
@@ -16,12 +24,7 @@ function Table() {
           <div class="col-sm-3 mt-5 mb-4 text-gred">
             <div className="search">
               <form class="form-inline">
-                <input
-                  class="form-control mr-sm-2"
-                  type="search"
-                  placeholder="Buscar Cliente"
-                  aria-label="Search"
-                />
+                <Filtrar filter={filter} setFilter={setFilter} />
               </form>
             </div>
           </div>
@@ -53,43 +56,50 @@ function Table() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((users) => (
-                  <tr>
-                    <td>{users.id}</td>
-                    <td>{users.first_name}</td>
-                    <td>{users.last_name}</td>
-                    <td>{users.email}</td>
-                    <td>{users.gender}</td>
-                    <td>
-                      <a
-                        href="#"
-                        class="view"
-                        title="View"
-                        data-toggle="tooltip"
-                        style={{ color: "#10ab80" }}
-                      >
-                        <i class="material-icons">&#xE417;</i>
-                      </a>
-                      <a
-                        href="#"
-                        class="edit"
-                        title="Edit"
-                        data-toggle="tooltip"
-                      >
-                        <i class="material-icons">&#xE254;</i>
-                      </a>
-                      <a
-                        href="#"
-                        class="delete"
-                        title="Delete"
-                        data-toggle="tooltip"
-                        style={{ color: "red" }}
-                      >
-                        <i class="material-icons">&#xE872;</i>
-                      </a>
-                    </td>
-                  </tr>
-                ))}
+                {clientesFiltrados.length > 0 ? (
+                  clientesFiltrados.map((user) => (
+                    <tr>
+                      <td>{user.id}</td>
+                      <td>{user.first_name}</td>
+                      <td>{user.last_name}</td>
+                      <td>{user.email}</td>
+                      <td>{user.gender}</td>
+                      <td>
+                        <a
+                          href="#"
+                          class="view"
+                          title="View"
+                          data-toggle="tooltip"
+                          style={{ color: "#10ab80" }}
+                        >
+                          <i class="material-icons">&#xE417;</i>
+                        </a>
+                        <a
+                          href="#"
+                          class="edit"
+                          title="Edit"
+                          data-toggle="tooltip"
+                        >
+                          <i class="material-icons">&#xE254;</i>
+                        </a>
+                        <a
+                          href="#"
+                          class="delete"
+                          title="Delete"
+                          data-toggle="tooltip"
+                          style={{ color: "red" }}
+                        >
+                          <i class="material-icons">&#xE872;</i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <h5>
+                    No se encontro ningun Sitio con la busqueda{" "}
+                    <strong>"{filter}"</strong>.
+                  </h5>
+                )}
               </tbody>
             </table>
           </div>
@@ -107,47 +117,7 @@ function Table() {
               <Modal.Title>Add Record</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <form>
-                <div class="form-group">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter Name"
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter Country"
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter City"
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Enter Country"
-                  />
-                </div>
-
-                <button type="submit" class="btn btn-success mt-4">
-                  Add Record
-                </button>
-              </form>
+              <Cliente />
             </Modal.Body>
 
             <Modal.Footer>

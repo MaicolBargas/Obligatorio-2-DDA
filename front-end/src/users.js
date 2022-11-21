@@ -5626,7 +5626,7 @@ export const users = [
     "last_name": "MacCague",
     "email": "mmaccaguemb@ft.com",
     "gender": "Male"
- , },
+  },
   {
     "id": 805,
     "first_name": "Uriel",
