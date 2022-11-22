@@ -6,6 +6,7 @@ import { PaginaClientes } from "./components/Pages/PaginaClientes";
 import { PaginaCliente } from "./components/Pages/PaginaCliente";
 import { Login } from "./components/Pages/Login";
 import { PaginaPlanes } from "./components/Pages/PaginaPlanes"
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           </Switch>
         </div>
       </Router>
+      <ScrollToTop />
     </>
   );
 }

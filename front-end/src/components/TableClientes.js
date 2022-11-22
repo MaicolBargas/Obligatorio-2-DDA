@@ -6,7 +6,6 @@ import { Cliente } from "./Cliente";
 import { Filtrar } from "./Filtrar";
 import { NavLink } from "react-router-dom";
 
-
 function Table() {
   const [show, setShow] = useState(false);
 
@@ -99,7 +98,9 @@ function Table() {
                           activeClassName="active"
                           className="nav-links"
                         >
-                          <Button variant="info" size='sm'>Editar</Button>
+                          <Button variant="info" size="sm">
+                            Editar
+                          </Button>
                         </NavLink>
                       </td>
                     </tr>

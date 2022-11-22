@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@heroicons/react": "^2.0.13",
     "@mui/icons-material": "latest",
     "@mui/joy": "latest",
     "@mui/material": "latest",
@@ -54,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@heroicons/react": "^1.0.6",
+    "react-icons": "^4.6.0",
+    "react-intersection-observer": "^8.33.1",
+    "react-scroll": "^1.8.6"
   }
 }
