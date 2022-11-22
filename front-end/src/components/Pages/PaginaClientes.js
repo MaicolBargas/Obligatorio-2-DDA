@@ -1,6 +1,6 @@
 import React from "react";
-import { Cliente } from "../Cliente";
-import TableClientes from "../Table";
+// import { Cliente } from "../Cliente";
+import TableClientes from "../TableClientes";
 
 export const PaginaClientes = () => {
   return (

@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Button, Modal} from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { users } from "../users";
 import { Cliente } from "./Cliente";
-import { Filtrar } from './Filtrar';
+import { Filtrar } from "./Filtrar";
+import { NavLink } from "react-router-dom";
 
 
 function Table() {
@@ -18,7 +19,7 @@ function Table() {
   );
 
   return (
-    <div class="container ">
+    <div class="container">
       <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
         <div class="row ">
           <div class="col-sm-3 mt-5 mb-4 text-gred">
@@ -65,12 +66,13 @@ function Table() {
                       <td>{user.email}</td>
                       <td>{user.gender}</td>
                       <td>
-                        <a
+                        {/* <a
                           href="#"
                           class="view"
                           title="View"
                           data-toggle="tooltip"
                           style={{ color: "#10ab80" }}
+                          onClick={handleShowDelete}
                         >
                           <i class="material-icons">&#xE417;</i>
                         </a>
@@ -90,13 +92,21 @@ function Table() {
                           style={{ color: "red" }}
                         >
                           <i class="material-icons">&#xE872;</i>
-                        </a>
+                        </a> */}
+                        <NavLink
+                          exact
+                          to={"/Cliente/" + user.id}
+                          activeClassName="active"
+                          className="nav-links"
+                        >
+                          <Button variant="info" size='sm'>Editar</Button>
+                        </NavLink>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <h5>
-                    No se encontro ningun Sitio con la busqueda{" "}
+                    No se encontro ningun Cliente con la busqueda{" "}
                     <strong>"{filter}"</strong>.
                   </h5>
                 )}

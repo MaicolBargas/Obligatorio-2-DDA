@@ -75,7 +75,7 @@ function Cliente() {
   };
 
   return (
-    <div className="container-cliente">
+    <div className="container-form">
       <form onSubmit={handleSubmit}>
         <h1>Cliente</h1>
         {inputs.map((input) => (
@@ -86,7 +86,7 @@ function Cliente() {
             onChange={onChange}
           />
         ))}
-        <button>Submit</button>
+        <button className="Mybutton">Submit</button>
       </form>
     </div>
   );
