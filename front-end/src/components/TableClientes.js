@@ -17,6 +17,7 @@ function Table() {
     user.first_name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
 
+
   return (
     <div class="container">
       <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
