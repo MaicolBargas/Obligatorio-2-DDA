@@ -1,10 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { users } from "../users";
 import { Cliente } from "./Cliente";
 import { Filtrar } from "./Filtrar";
 import { NavLink } from "react-router-dom";
+
+import fetch from 'cross-fetch'
+
+// import { getAllClients} from "../utils";
+
 
 function Table() {
   const [show, setShow] = useState(false);
@@ -12,9 +17,31 @@ function Table() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // const [clients, setClients] = useState([])
+  //   useEffect(() => {
+  //   getClients()
+  //   }, [])
+
+  // function getClients(){
+  //   getAllClients()
+  //   .then(response => {
+  //   setClients(response)
+  //   })
+  // }
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/cliente/list")
+      .then((res) => res.json())
+      .then((result) => {
+        setClients(result);
+      });
+  }, []);
+
+
   const [filter, setFilter] = useState("");
-  const clientesFiltrados = users.filter((user) =>
-    user.first_name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  const clientesFiltrados = clients.filter((client) =>
+  client.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
 
 
@@ -52,19 +79,17 @@ function Table() {
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>Email </th>
-                  <th>Genero </th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {clientesFiltrados.length > 0 ? (
-                  clientesFiltrados.map((user) => (
+                  clientesFiltrados.map((client) => (
                     <tr>
-                      <td>{user.id}</td>
-                      <td>{user.first_name}</td>
-                      <td>{user.last_name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.gender}</td>
+                      <td>{client.id}</td>
+                      <td>{client.nombre}</td>
+                      <td>{client.apellido}</td>
+                      <td>{client.email}</td>
                       <td>
                         {/* <a
                           href="#"
@@ -95,7 +120,7 @@ function Table() {
                         </a> */}
                         <NavLink
                           exact
-                          to={"/Cliente/" + user.id}
+                          to={"/Cliente/" + client.id}
                           activeClassName="active"
                           className="nav-links"
                         >
