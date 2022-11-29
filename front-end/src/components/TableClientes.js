@@ -1,8 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-// import { users } from "../users";
-import { Cliente } from "./Cliente";
 import { Filtrar } from "./Filtrar";
 import { NavLink } from "react-router-dom";
 
@@ -10,8 +8,6 @@ import "../App.css";
 import FormInput from "./FormInput";
 
 import fetch from "cross-fetch";
-
-// import { getAllClients} from "../utils";
 
 function Table() {
   const [show, setShow] = useState(false);
@@ -23,17 +19,52 @@ function Table() {
     e.preventDefault();
   };
 
+  //METODO LISTAR CLIENTES
+  const [clients, setClients] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8080/cliente/list")
+      .then((res) => res.json())
+      .then((result) => {
+        setClients(result);
+      });
+  }, []);
+  //------------------------------------------------------------------------------------------
+
+  //METODO POST
+  const altaCliente = (e) => {
+    var url = "http://localhost:8080/cliente/add";
+    var data = {
+      ci: values.ci,
+      nombre: values.name,
+      apellido: values.apellido,
+      email: values.email,
+    };
+    console.log(data);
+    fetch(url, {
+      method: "POST", // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .catch((error) => console.error("Error:", error))
+      .then((response) => console.log("Success:", response));
+  };
+  //------------------------------------------------------------------------------------------
+
   //FORMULARIO ALTA CLIENTE
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const [values, setValues] = useState({
     ci: "",
-    email: "",
     name: "",
-    // password: "",
-    // confirmPassword: "",
+    apellido: "",
+    email: "",
   });
+
   const inputs = [
     {
       id: 1,
@@ -62,7 +93,8 @@ function Table() {
       name: "apellido",
       type: "text",
       placeholder: "Apellido",
-      errorMessage: "Name should be 5-30 characters and shouldn't include any special character!",
+      errorMessage:
+        "Name should be 5-30 characters and shouldn't include any special character!",
       pattern: "^[A-Za-z0-9]{5,30}$",
       label: "Email",
       required: true,
@@ -76,67 +108,15 @@ function Table() {
       label: "Email",
       required: true,
     },
-    // {
-    //   id: 4,
-    //   name: "password",
-    //   type: "password",
-    //   placeholder: "Password",
-    //   errorMessage:
-    //     "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
-    //   label: "Password",
-    //   pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-    //   required: true,
-    // },
-    // {
-    //   id: 5,
-    //   name: "confirmPassword",
-    //   type: "password",
-    //   placeholder: "Confirm Password",
-    //   errorMessage: "Passwords don't match!",
-    //   label: "Confirm Password",
-    //   pattern: values.password,
-    //   required: true,
-    // },
   ];
-  //------------------------------------------------------------------------------------
-
-  //METODO POST
-  const [id, setId] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState([]);
-  const [email, setEmail] = useState([]);
-
-  const altaCliente = (e) => {
-    e.preventDefault();
-    const cliente = { id, nombre, apellido, email };
-    console.log(cliente);
-    fetch("http://localhost:8080/cliente/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cliente),
-    }).then(() => {
-      console.log("cliente agregado");
-    });
-  };
-  //--------------------------------------------------------
-
-  //METODO LISTAR CLIENTES
-  const [clients, setClients] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:8080/cliente/list")
-      .then((res) => res.json())
-      .then((result) => {
-        setClients(result);
-      });
-  }, []);
-  //------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
 
   //FILTRAR CLIENTES
   const [filter, setFilter] = useState("");
   const clientesFiltrados = clients.filter((client) =>
     client.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
-  //------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
 
   return (
     <div className="container">
@@ -179,8 +159,8 @@ function Table() {
                 {clientesFiltrados.length > 0 ? (
                   clientesFiltrados.map((client) => (
                     <tr>
-                      <td>{client.id}</td>
-                      <td>{client.Nombre}</td>
+                      <td>{client.ci}</td>
+                      <td>{client.nombre}</td>
                       <td>{client.apellido}</td>
                       <td>{client.email}</td>
                       <td>
@@ -213,7 +193,7 @@ function Table() {
                         </a> */}
                         <NavLink
                           exact
-                          to={"/Cliente/" + client.id}
+                          to={"/Cliente/" + client.ci}
                           activeClassName="active"
                           className="nav-links"
                         >
@@ -258,7 +238,9 @@ function Table() {
                       onChange={onChange}
                     />
                   ))}
-                  <button className="Mybutton" onClick={altaCliente}>Submit</button>
+                  <button className="Mybutton" onClick={altaCliente}>
+                    Submit
+                  </button>
                 </form>
               </div>
             </Modal.Body>
