@@ -1,10 +1,10 @@
 import React from "react";
-import { Plan } from "../Plan";
+import TablePlanes from "../TablePlanes";
 
 export const PaginaPlanes = () => {
   return (
     <div>
-      <Plan></Plan>
+      <TablePlanes />
     </div>
   );
 };
