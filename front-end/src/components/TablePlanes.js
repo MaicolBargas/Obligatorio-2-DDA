@@ -19,13 +19,13 @@ function Table() {
     e.preventDefault();
   };
 
-  //METODO LISTAR CLIENTES
-  const [clients, setClients] = useState([]);
+  //METODO LISTAR PLANES
+  const [plans, setPlanes] = useState([]);
   useEffect(() => {
     fetch("http://localhost:8080/plan/list")
       .then((res) => res.json())
       .then((result) => {
-        setClients(result);
+        setPlanes(result);
       });
   }, []);
   //------------------------------------------------------------------------------------------
@@ -68,44 +68,40 @@ function Table() {
   const inputs = [
     {
       id: 1,
-      name: "ci",
+      name: "id",
       type: "text",
-      placeholder: "CI",
+      placeholder: "ID",
       errorMessage:
-        "CI should be 7-8 characters and shouldn't include any special character!",
+        "ID should be 1-8 characters and shouldn't include any special character!",
       label: "CI",
-      pattern: "^[z0-9]{7,8}$",
+      pattern: "^[z0-9]{1,8}$",
       required: true,
     },
     {
       id: 2,
-      name: "name",
+      name: "destino",
       type: "text",
-      placeholder: "Name",
+      placeholder: "Destino",
       errorMessage:
-        "Name should be 5-30 characters and shouldn't include any special character!",
+        "Destino should be 5-30 characters and shouldn't include any special character!",
       pattern: "^[A-Za-z0-9]{5,30}$",
-      label: "Name",
+      label: "Destino",
       required: true,
     },
     {
       id: 3,
-      name: "apellido",
+      name: "modalidad",
       type: "text",
-      placeholder: "Apellido",
-      errorMessage:
-        "Name should be 5-30 characters and shouldn't include any special character!",
-      pattern: "^[A-Za-z0-9]{5,30}$",
-      label: "Email",
+      placeholder: "Modalidad",
+      label: "Modalidad",
       required: true,
     },
     {
       id: 4,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      errorMessage: "It should be a valid email address!",
-      label: "Email",
+      name: "precio",
+      type: "text",
+      placeholder: "Precio",
+      label: "Precio",
       required: true,
     },
   ];
@@ -113,8 +109,8 @@ function Table() {
 
   //FILTRAR CLIENTES
   const [filter, setFilter] = useState("");
-  const planesFiltrados = clients.filter((client) =>
-    client.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  const planesFiltrados = plans.filter((plan) =>
+    plan.destino.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
   //------------------------------------------------------------------------------------------
 
@@ -149,20 +145,22 @@ function Table() {
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Email </th>
-                  <th>Actions</th>
+                  <th>Destino</th>
+                  <th>Fecha</th>
+                  <th>Modalidad</th>
+                  <th>Precio</th>
+                  <th>Editar</th>
                 </tr>
               </thead>
               <tbody>
                 {planesFiltrados.length > 0 ? (
-                  planesFiltrados.map((client) => (
+                  planesFiltrados.map((plan) => (
                     <tr>
-                      <td>{client.ci}</td>
-                      <td>{client.nombre}</td>
-                      <td>{client.apellido}</td>
-                      <td>{client.email}</td>
+                      <td>{plan.id}</td>
+                      <td>{plan.destino}</td>
+                      <td>{plan.fecha}</td>
+                      <td>{plan.modalidad}</td>
+                      <td>{plan.precio}</td>
                       <td>
                         {/* <a
                           href="#"
@@ -193,7 +191,7 @@ function Table() {
                         </a> */}
                         <NavLink
                           exact
-                          to={"/Plan/" + client.ci}
+                          to={"/Plan/" + plan.ci}
                           activeClassName="active"
                           className="nav-links"
                         >

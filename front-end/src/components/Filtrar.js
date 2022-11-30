@@ -11,7 +11,7 @@ export const Filtrar = ({ filter, setFilter }) => {
 			<input
 				className="inputFiltrar"
 				type='text'
-				placeholder='Buscar Cliente'
+				placeholder='Buscar'
 				name='buscar'
 				onChange={handleInput}
 				value={filter}

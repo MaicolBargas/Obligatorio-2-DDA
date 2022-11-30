@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export const Login = () => {
+export const PaginaClientePlan = () => {
   return (
     <div>
      <h1>login</h1>
